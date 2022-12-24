@@ -6,7 +6,8 @@ import com.personal.regex.core.model.SyntaxTree.{
   BinaryDivision => BD,
   BinaryMultiplication => BM,
   BinarySubtraction => BS,
-  Constant => C
+  Constant => C,
+  Variable => V
 }
 import com.personal.regex.impl.DefaultRegexParser
 
@@ -26,7 +27,7 @@ class CustomRegexStringSpec extends ParserSpec {
     parser.parse(regex) should matchParseResult(BA(C(1), C(2)))
   }
 
-  it should "parser custom regex 11" in {
+  it should "parser custom regex 1a" in {
     val regex = "(1 + 2)"
     parser.parse(regex) should matchParseResult(BA(C(1), C(2)))
   }
@@ -69,5 +70,20 @@ class CustomRegexStringSpec extends ParserSpec {
   it should "parser custom regex 9" in {
     val regex = "1"
     parser.parse(regex) should matchParseResult(C(1))
+  }
+
+  it should "parser custom regex 10" in {
+    val regex = "a"
+    parser.parse(regex) should matchParseResult(V("a"))
+  }
+
+  it should "parser custom regex 11" in {
+    val regex = "C"
+    parser.parse(regex) should matchParseResult(V("C"))
+  }
+
+  it should "parser custom regex 12" in {
+    val regex = "((1+A)*((b/2)-1))"
+    parser.parse(regex) should matchParseResult(BM(BA(C(1), V("A")), BS(BD(V("b"), C(2)), C(1))))
   }
 }

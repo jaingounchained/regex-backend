@@ -27,7 +27,7 @@ final class DefaultRegexParser extends RegexParser {
 
   def syntaxTree[_: P]: P[SyntaxTree] =
     P("(" ~/ binaryOperation ~/ ")") |
-    P(lit.constant)
+    P(lit.literal)
 
   def binaryOperation[_: P]: P[BinaryOperation] = {
     import com.personal.regex.core.model.SyntaxTree._

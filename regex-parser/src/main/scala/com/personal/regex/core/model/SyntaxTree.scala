@@ -16,7 +16,7 @@ object SyntaxTree {
     case class BinaryDivision(left: SyntaxTree, right: SyntaxTree) extends BinaryOperation
 
     sealed trait Literal extends SyntaxTree
-  //  type VariableName = String
+    type VariableName = String
     case class Constant(value: BigDecimal) extends Literal
-  //  case class Variable(name: VariableName) extends Literal
+    case class Variable(name: VariableName) extends Literal
 }

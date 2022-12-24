@@ -1,8 +1,7 @@
 package com.personal.regex.impl
 
-import com.personal.regex.core.model.SyntaxTree.Constant
+import com.personal.regex.core.model.SyntaxTree.{Constant, Literal, Variable, VariableName}
 import fastparse._
-import com.personal.regex.impl.Syntax.ParsedSyntax
 
 /**
  * Created by Bhavya Jain.
@@ -10,14 +9,21 @@ import com.personal.regex.impl.Syntax.ParsedSyntax
  */
 private final class LiteralParser {
 
-  def constant[_: P]: P[Constant] =
+  def literal[_: P]: P[Literal] =
+    constant | variable
+
+  private def constant[_: P]: P[Constant] =
     P(numeric).map(Constant)
 
-  def numeric[_: P]: P[BigDecimal] =
+  private def numeric[_: P]: P[BigDecimal] =
     P("-".? ~~ numericString ~~ ".".? ~~ numericString.?).!.map(BigDecimal.exact)
 
   private def numericString[_: P]: P[String] =
     P(CharsWhileIn("0123456789", 1)).!
 
-//  def variableString[_: P]: P[VariableName] = ???
+  private def variable[_: P]: P[Variable] =
+    P(variableString).map(Variable)
+
+  private def variableString[_: P]: P[VariableName] =
+    P(CharsWhileIn("a-zA-Z", 1)).!
 }

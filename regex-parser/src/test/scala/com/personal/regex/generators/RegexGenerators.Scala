@@ -36,10 +36,10 @@ object RegexGenerators {
       (1, Gen.oneOf(Gen.const(0).map(BigDecimal.apply), Gen.const(0.0).map(BigDecimal.apply))),
       (50, Gen.oneOf(Gen.posNum[Int].map(BigDecimal.apply), Gen.posNum[Double].map(BigDecimal.apply))),
     )
-//
-//  val genVariable: Gen[Variable] =
-//    genVariableName.map(Variable)
-//
-//  val genVariableName: Gen[VariableName] =
-//    Gen.oneOf('a' to 'z').toString
+
+  val genVariable: Gen[Variable] =
+    genVariableName.map(Variable)
+
+  val genVariableName: Gen[VariableName] =
+    Gen.oneOf('a' to 'z').toString
 }
