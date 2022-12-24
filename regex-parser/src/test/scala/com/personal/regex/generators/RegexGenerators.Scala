@@ -1,20 +1,21 @@
 package com.personal.regex.generators
 
+import com.personal.regex.core.model.SyntaxTree
 import com.personal.regex.core.model.SyntaxTree._
 import org.scalacheck.Gen
 
 object RegexGenerators {
 
-//  def genRegex: Gen[Regex] =
-//    Gen.frequency(
-//      (1, genBinaryOperator),
-//      (5, genLiteral)
-//    )
+  val genSyntaxTree: Gen[SyntaxTree] =
+    Gen.frequency(
+      (5, genLiteral),
+      (1, genBinaryOperator)
+    )
 
   val genBinaryOperator: Gen[BinaryOperation] = {
     for {
-      left <- genLiteral
-      right <- genLiteral
+      left <- genSyntaxTree
+      right <- genSyntaxTree
       binaryOperation <- Gen.oneOf(
         BinaryAddition(left, right),
         BinarySubtraction(left, right),
