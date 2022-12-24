@@ -29,9 +29,11 @@ final class DefaultRegexParser extends RegexParser {
 
   def binaryOperation[_: P]: P[BinaryOperation] = {
     import com.personal.regex.core.model.SyntaxTree._
-    P(lit.numeric).flatMap{ l =>
-      P("+" ~/ lit.numeric).map(r => BinaryAddition(l, r)) |
-      P("-" ~/ lit.numeric).map(r => BinarySubtraction(l, r))
+    P(lit.constant).flatMap{ l =>
+      P("+" ~/ lit.constant).map(r => BinaryAddition(l, r)) |
+      P("-" ~/ lit.constant).map(r => BinarySubtraction(l, r)) |
+      P("*" ~/ lit.constant).map(r => BinaryMultiplication(l, r)) |
+      P("/" ~/ lit.constant).map(r => BinaryDivision(l, r))
     }
   }
 

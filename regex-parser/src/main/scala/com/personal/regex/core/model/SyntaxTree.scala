@@ -10,13 +10,13 @@ sealed trait SyntaxTree extends Any
 object SyntaxTree {
 
   sealed trait BinaryOperation extends Any with SyntaxTree
-  case class BinaryAddition(left: BigDecimal, right: BigDecimal) extends BinaryOperation
-  case class BinarySubtraction(left: BigDecimal, right: BigDecimal) extends BinaryOperation
-  //  case class Multiplication(left: Regex, right: Regex) extends BinaryOperation
-  //  case class Division(left: Regex, right: Regex) extends BinaryOperation
+  case class BinaryAddition(left: Literal, right: Literal) extends BinaryOperation
+  case class BinarySubtraction(left: Literal, right: Literal) extends BinaryOperation
+    case class BinaryMultiplication(left: Literal, right: Literal) extends BinaryOperation
+    case class BinaryDivision(left: Literal, right: Literal) extends BinaryOperation
 
-  //  sealed trait Literal extends Regex
+    sealed trait Literal extends SyntaxTree
   //  type VariableName = String
-  //  case class Constant(value: BigDecimal) extends Literal
+    case class Constant(value: BigDecimal) extends Literal
   //  case class Variable(name: VariableName) extends Literal
 }
