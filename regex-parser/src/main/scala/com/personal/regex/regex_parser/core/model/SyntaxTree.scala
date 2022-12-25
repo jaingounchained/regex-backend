@@ -1,4 +1,4 @@
-package com.personal.regex.core.model
+package com.personal.regex.regex_parser.core.model
 
 /**
  * Created by Bhavya Jain.

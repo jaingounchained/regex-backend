@@ -1,9 +1,9 @@
-package com.personal.regex
+package com.personal.regex.regex_parser
 
-import com.personal.regex.core.RegexParser
-import com.personal.regex.core.RegexParser.ParseResult
-import com.personal.regex.core.model.SyntaxTree
-import com.personal.regex.core.model.regex.Regex
+import com.personal.regex.regex_parser.core.RegexParser
+import com.personal.regex.regex_parser.core.RegexParser.ParseResult
+import com.personal.regex.regex_parser.core.model.SyntaxTree
+import com.personal.regex.regex_parser.core.model.regex.Regex
 import org.scalatest.matchers.{MatchResult, Matcher}
 
 /**

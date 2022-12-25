@@ -1,7 +1,7 @@
-package com.personal.regex.core
+package com.personal.regex.regex_parser.core
 
-import com.personal.regex.core.RegexParser.ParseResult
-import com.personal.regex.core.model.regex.Regex
+import com.personal.regex.regex_parser.core.RegexParser.ParseResult
+import com.personal.regex.regex_parser.core.model.regex.Regex
 
 object RegexParser {
 

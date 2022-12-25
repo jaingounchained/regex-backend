@@ -1,7 +1,7 @@
-package com.personal.regex.generators
+package com.personal.regex.regex_parser.generators
 
-import com.personal.regex.core.model.SyntaxTree
-import com.personal.regex.core.model.SyntaxTree._
+import com.personal.regex.regex_parser.core.model.SyntaxTree
+import com.personal.regex.regex_parser.core.model.SyntaxTree._
 import org.scalacheck.Gen
 
 object RegexGenerators {

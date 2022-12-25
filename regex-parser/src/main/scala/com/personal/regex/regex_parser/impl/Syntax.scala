@@ -1,4 +1,4 @@
-package com.personal.regex.impl
+package com.personal.regex.regex_parser.impl
 
 import fastparse.P
 /**

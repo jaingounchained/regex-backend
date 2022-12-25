@@ -1,4 +1,4 @@
-package com.personal.regex
+package com.personal.regex.regex_parser
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers

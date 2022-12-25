@@ -1,7 +1,8 @@
-package com.personal.regex.expressions
+package com.personal.regex.regex_parser.expressions
 
-import com.personal.regex.ParserSpec
-import com.personal.regex.core.model.SyntaxTree.{
+import com.personal.regex.regex_parser.ParserSpec
+import com.personal.regex.regex_parser.impl.DefaultRegexParser
+import com.personal.regex.regex_parser.core.model.SyntaxTree.{
   BinaryAddition => BA,
   BinaryDivision => BD,
   BinaryMultiplication => BM,
@@ -9,7 +10,6 @@ import com.personal.regex.core.model.SyntaxTree.{
   Constant => C,
   Variable => V
 }
-import com.personal.regex.impl.DefaultRegexParser
 
 /**
  * Created by Bhavya Jain.

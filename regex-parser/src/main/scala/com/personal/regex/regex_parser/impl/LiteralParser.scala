@@ -1,6 +1,6 @@
-package com.personal.regex.impl
+package com.personal.regex.regex_parser.impl
 
-import com.personal.regex.core.model.SyntaxTree.{Constant, Literal, Variable, VariableName}
+import com.personal.regex.regex_parser.core.model.SyntaxTree.{Constant, Literal, Variable, VariableName}
 import fastparse._
 
 /**

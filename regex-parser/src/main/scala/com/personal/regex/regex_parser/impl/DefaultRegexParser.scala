@@ -1,10 +1,10 @@
-package com.personal.regex.impl
+package com.personal.regex.regex_parser.impl
 
-import com.personal.regex.core.RegexParser
-import com.personal.regex.core.RegexParser.ParseResult
-import com.personal.regex.core.model.SyntaxTree
-import com.personal.regex.core.model.SyntaxTree.{BinaryOperation}
-import com.personal.regex.core.model.regex.Regex
+import com.personal.regex.regex_parser.core.RegexParser
+import com.personal.regex.regex_parser.core.RegexParser.ParseResult
+import com.personal.regex.regex_parser.core.model.SyntaxTree
+import com.personal.regex.regex_parser.core.model.SyntaxTree._
+import com.personal.regex.regex_parser.core.model.regex.Regex
 import fastparse._
 
 final class DefaultRegexParser extends RegexParser {
@@ -30,7 +30,6 @@ final class DefaultRegexParser extends RegexParser {
     P("(" ~/ binaryOperation ~/ ")")
 
   def binaryOperation[_: P]: P[BinaryOperation] = {
-    import com.personal.regex.core.model.SyntaxTree._
     P(syntaxTree).flatMap{ l =>
       P("+" ~/ syntaxTree).map(r => BinaryAddition(l, r)) |
       P("-" ~/ syntaxTree).map(r => BinarySubtraction(l, r)) |
