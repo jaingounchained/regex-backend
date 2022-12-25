@@ -8,6 +8,7 @@ import fastparse._
  * 2022-07-31
  */
 private final class LiteralParser {
+  import fastparse.NoWhitespace._
 
   def literal[_: P]: P[Literal] =
     constant | variable
@@ -25,5 +26,5 @@ private final class LiteralParser {
     P(variableString).map(Variable)
 
   private def variableString[_: P]: P[VariableName] =
-    P(CharsWhileIn("a-zA-Z", 1)).!
+    P(CharIn("a-zA-Z").rep(min = 1, max = 3).!)
 }

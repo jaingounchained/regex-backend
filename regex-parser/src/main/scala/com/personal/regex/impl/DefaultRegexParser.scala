@@ -26,8 +26,8 @@ final class DefaultRegexParser extends RegexParser {
       .map(syntaxTree => Regex(syntaxTree))
 
   def syntaxTree[_: P]: P[SyntaxTree] =
-    P("(" ~/ binaryOperation ~/ ")") |
-    P(lit.literal)
+    P(lit.literal) |
+    P("(" ~/ binaryOperation ~/ ")")
 
   def binaryOperation[_: P]: P[BinaryOperation] = {
     import com.personal.regex.core.model.SyntaxTree._
@@ -38,14 +38,4 @@ final class DefaultRegexParser extends RegexParser {
       P("/" ~/ syntaxTree).map(r => BinaryDivision(l, r))
     }
   }
-
-  //  def addSub[_: P]: P[BinaryOperation] =
-//    P(regex).flatMap { l =>
-//      P("+" ~~ regex).map(Addition(l, _)) |
-//      P("-" ~~ regex).map(Subtraction(l, _))
-//    }
-//
-//  def literal[_: P]: P[Literal] =
-//    P(value.numeric).map(Constant) |
-//    P(value.variableString).map(Variable)
 }
