@@ -1,35 +1,31 @@
 package com.personal.regex.generators
 
-import com.personal.regex.core.model.regex.Regex
-import com.personal.regex.core.model.regex.Regex._
+import com.personal.regex.core.model.SyntaxTree
+import com.personal.regex.core.model.SyntaxTree._
 import org.scalacheck.Gen
 
 object RegexGenerators {
 
-  def genRegex: Gen[Regex] =
+  val genSyntaxTree: Gen[SyntaxTree] =
     Gen.frequency(
-      (1, genBinaryOperator),
-      (5, genLiteral)
+      (5, genLiteral),
+      (1, genBinaryOperator)
     )
 
   val genBinaryOperator: Gen[BinaryOperation] = {
     for {
-      left <- genRegex
-      right <- genRegex
+      left <- genSyntaxTree
+      right <- genSyntaxTree
       binaryOperation <- Gen.oneOf(
-        Addition(left, right),
-        Subtraction(left, right),
-        Multiplication(left, right),
-        Division(left, right)
+        BinaryAddition(left, right),
+        BinarySubtraction(left, right),
+        BinaryMultiplication(left, right),
+        BinaryDivision(left, right)
       )
     } yield binaryOperation
   }
 
-  val genLiteral: Gen[Literal] =
-    Gen.frequency(
-      (1, genVariable),
-      (5, genConstant)
-    )
+  val genLiteral: Gen[Literal] = genConstant
 
   val genConstant: Gen[Constant] =
     genBigDecimal.map(Constant)
