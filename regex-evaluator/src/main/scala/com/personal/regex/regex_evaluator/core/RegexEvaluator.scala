@@ -1,5 +1,6 @@
 package com.personal.regex.regex_evaluator.core
 
+import com.personal.regex.regex_evaluator.core.external.VariableContext
 import com.personal.regex.regex_evaluator.core.result.RegexEvaluationResult
 import com.personal.regex.regex_parser.core.model.regex.Regex
 
@@ -9,5 +10,5 @@ import com.personal.regex.regex_parser.core.model.regex.Regex
  */
 trait RegexEvaluator {
 
-  def apply(regex: Regex): RegexEvaluationResult
+  def apply(regex: Regex)(implicit ctx: VariableContext): RegexEvaluationResult
 }

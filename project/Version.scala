@@ -4,6 +4,7 @@
  */
 object Version {
   val cats = "2.9.0"
+
   val fastparse = "2.3.3"
 
   // test dependencies

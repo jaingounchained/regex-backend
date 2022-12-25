@@ -1,6 +1,6 @@
 package com.personal.regex.regex_evaluator.core.result
 
-import com.personal.regex.regex_evaluator.core.external.VariableContext
+//import com.personal.regex.regex_evaluator.core.external.VariableContext
 
 /**
  * Created by Bhavya Jain.
@@ -17,9 +17,9 @@ object RegexEvaluationResult {
    * Regex was successfully evaluated
    * @param result final result of regex
    */
-  case class EvaluatedValue(result: BigDecimal) extends RegexEvaluationResult.Valid
+  case class EvaluatedValue(result: Any) extends RegexEvaluationResult.Valid
 
-  case class Partial(f: VariableContext => RegexEvaluationResult.Conclusive) extends RegexEvaluationResult
+//  case class Partial(f: VariableContext => RegexEvaluationResult.Conclusive) extends RegexEvaluationResult
 
   /**
    * Regex could not be successfully evaluated

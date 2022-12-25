@@ -19,6 +19,9 @@ lazy val `regex-evaluator` = (project in file("regex-evaluator"))
   .dependsOn(`regex-parser` % "compile->compile;test->test")
   .settings(
     name := "regex-evaluator",
+    libraryDependencies ++= Seq(
+      "org.typelevel" %% "cats-core" % Version.cats
+    ),
     // Test dependencies
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % Version.scalatest,
