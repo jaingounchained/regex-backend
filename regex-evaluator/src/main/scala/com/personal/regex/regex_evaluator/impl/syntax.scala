@@ -1,6 +1,7 @@
 package com.personal.regex.regex_evaluator.impl
 
 import com.personal.regex.regex_evaluator.core.result.RegexEvaluationResult
+import scala.util.Try
 
 /**
  * Created by Bhavya Jain.
@@ -8,7 +9,7 @@ import com.personal.regex.regex_evaluator.core.result.RegexEvaluationResult
  */
 private[impl] object syntax  {
 
-  final implicit class RegexEvaluationContinueSyntax[A](val v: A) extends AnyVal {
+  final implicit class RegexEvaluationContinueSyntax[A](val v: Try[A]) extends AnyVal {
 
     def continueEvaluation: RegexEvaluation[A] =
       RegexEvaluation.Continue(v)

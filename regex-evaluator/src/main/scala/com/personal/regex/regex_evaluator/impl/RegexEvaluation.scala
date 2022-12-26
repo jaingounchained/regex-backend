@@ -3,6 +3,8 @@ package com.personal.regex.regex_evaluator.impl
 import cats.{Applicative, Functor}
 import com.personal.regex.regex_evaluator.core.result.RegexEvaluationResult
 
+import scala.util.{Failure, Success, Try}
+
 /**
  * Created by Bhavya Jain.
  * 2022-12-25
@@ -13,23 +15,26 @@ private[impl] object RegexEvaluation {
 
   type Effect = Applicative[RegexEvaluation] with Functor[RegexEvaluation]
 
-  final case class Continue[+A](value: A) extends AnyVal with RegexEvaluation[A]
+  final case class Continue[+A](value: Try[A]) extends AnyVal with RegexEvaluation[A]
 
   final case class Invalid(message: String) extends RegexEvaluation[Nothing]
 
   def toEvaluationResult[BigDecimal](evaluation: RegexEvaluation[BigDecimal]): RegexEvaluationResult =
     evaluation match {
-      case Continue(value) => RegexEvaluationResult.EvaluatedValue(value)
+      case Continue(tryValue) => tryValue match {
+        case Success(value) => RegexEvaluationResult.EvaluatedValue(value)
+        case Failure(exception) => RegexEvaluationResult.Invalid(exception.getMessage)
+      }
       case Invalid(message) => RegexEvaluationResult.Invalid(message)
     }
 
   implicit val effect: Effect = new Applicative[RegexEvaluation] with Functor[RegexEvaluation] {
 
-    override def pure[A](x: A): RegexEvaluation[A] = Continue(x)
+    override def pure[A](x: A): RegexEvaluation[A] = Continue(Success(x))
 
     override def map[A, B](fa: RegexEvaluation[A])(f: A => B): RegexEvaluation[B] =
       fa match {
-        case Continue(value) => Continue(f(value))
+        case Continue(value) => Continue(value.map(f))
         case Invalid(message) => Invalid(message)
       }
 
@@ -37,7 +42,9 @@ private[impl] object RegexEvaluation {
       fa match {
         case Continue(l) =>
           fb match {
-            case Continue(r) => Continue(f(l, r))
+            case Continue(r) =>
+              val v = for { lv <- l; rv <- r } yield f(lv, rv)
+              Continue(v)
             case r: Invalid => r
           }
 

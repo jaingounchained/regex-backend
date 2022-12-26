@@ -42,4 +42,11 @@ class CustomEvaluationSpec extends PartialEvaluatorSpec {
 
     evaluator(regex) shouldBe RegexEvaluationResult.EvaluatedValue(9)
   }
+
+  it should "custom evaluation 5" in {
+    val regex: Regex = Regex(BA(C(1), BD(C(2), C(0))))
+    implicit val ctx: VariableContext = VariableContext.empty
+
+    evaluator(regex) shouldBe RegexEvaluationResult.Invalid("Division by zero")
+  }
 }

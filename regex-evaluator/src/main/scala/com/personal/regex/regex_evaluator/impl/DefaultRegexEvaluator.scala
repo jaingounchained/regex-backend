@@ -8,6 +8,8 @@ import com.personal.regex.regex_parser.core.model.SyntaxTree
 import com.personal.regex.regex_parser.core.model.SyntaxTree._
 import com.personal.regex.regex_parser.core.model.regex.Regex
 
+import scala.util.Try
+
 /**
  * Created by Bhavya Jain.
  * 2022-12-25
@@ -54,11 +56,11 @@ final class DefaultRegexEvaluator extends RegexEvaluator {
   private def interpretLiteral(literal: Literal)(implicit ctx: VariableContext): RegexEvaluation[BigDecimal] =
     literal match {
       case Constant(value: BigDecimal) =>
-        value.continueEvaluation
+        Try(value).continueEvaluation
       case Variable(variable: VariableName) =>
         ctx.variableMap.get(variable) match {
           case Some(value) =>
-            value.continueEvaluation
+            Try(value).continueEvaluation
           case None =>
             (variable + " value doesn't exist in variable context").invalidEvaluation
         }
